@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Premium E-commerce</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#8B5CF6',
+                        accent: '#F59E0B'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-inter bg-gray-50 text-gray-800">
+    <!-- Navigation -->
+    <nav class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="text-2xl font-bold text-primary">ShopPro</a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="index.html" class="text-gray-700 hover:text-primary transition-colors">Home</a>
+                        <a href="product.html" class="text-gray-700 hover:text-primary transition-colors">Products</a>
+                        <div class="relative group">
+                            <button class="flex items-center space-x-1 text-primary font-semibold">
+                                <span>Dashboard</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </button>
+                            <div class="absolute top-full left-0 mt-1 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                                <a href="admin-dashboard.html" class="block px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50">Admin</a>
+                                <a href="user-dashboard.html" class="block px-4 py-2 text-primary font-semibold hover:bg-gray-50">User</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <!-- RTL Toggle -->
+                    <button id="rtlToggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors" title="Toggle RTL">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
+                        </svg>
+                    </button>
+                    <!-- Profile Dropdown -->
+                    <div class="relative group">
+                        <button class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                            <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                <span class="text-white text-sm font-semibold">U</span>
+                            </div>
+                            <span class="text-sm font-medium text-gray-700">User</span>
+                        </button>
+                        <div class="absolute top-full right-0 mt-1 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                            <a href="#" class="block px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50">Settings</a>
+                            <a href="login.html" class="block px-4 py-2 text-gray-700 hover:text-primary hover:bg-gray-50">Logout</a>
+                        </div>
+                    </div>
+                    <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg hover:bg-gray-100">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden bg-white border-t border-gray-200 hidden">
+            <div class="px-4 py-4 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-700 hover:text-primary">Home</a>
+                <a href="product.html" class="block py-2 text-gray-700 hover:text-primary">Products</a>
+                <a href="admin-dashboard.html" class="block py-2 text-gray-700 hover:text-primary">Admin Dashboard</a>
+                <a href="user-dashboard.html" class="block py-2 text-primary font-semibold">User Dashboard</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Dashboard Content -->
+    <main class="pt-16">
+        <!-- Header -->
+        <div class="bg-white border-b border-gray-200">
+            <div class="container mx-auto px-4 lg:px-8 py-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h1 class="text-3xl font-bold text-gray-900">User Dashboard</h1>
+                        <p class="text-gray-600 mt-1">Welcome back! Here is your recent activity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Stats Cards -->
+        <div class="container mx-auto px-4 lg:px-8 py-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow-sm border p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Total Orders</p>
+                            <p class="text-3xl font-bold text-gray-900">12</p>
+                            <p class="text-sm text-blue-600 font-medium">+2 this month</p>
+                        </div>
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Wishlist</p>
+                            <p class="text-3xl font-bold text-gray-900">5</p>
+                            <p class="text-sm text-purple-600 font-medium">+1 this month</p>
+                        </div>
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Cart Items</p>
+                            <p class="text-3xl font-bold text-gray-900">3</p>
+                            <p class="text-sm text-amber-600 font-medium">Checkout soon!</p>
+                        </div>
+                        <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4-8-4m16 0v10l-8 4-8-4V7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border p-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm font-medium text-gray-600">Account Age</p>
+                            <p class="text-3xl font-bold text-gray-900">1 yr</p>
+                            <p class="text-sm text-green-600 font-medium">Loyal customer</p>
+                        </div>
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Recent Orders -->
+            <div class="bg-white rounded-xl shadow-sm border mb-8">
+                <div class="p-6 border-b border-gray-200">
+                    <div class="flex justify-between items-center">
+                        <h3 class="text-lg font-bold text-gray-900">Recent Orders</h3>
+                        <a href="#" class="text-sm text-primary hover:text-blue-600 font-semibold">View All</a>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-semibold">#101</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Wireless Mouse</p>
+                                    <p class="text-sm text-gray-600">1 item • $25.00</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 bg-green-100 text-green-800 text-sm rounded-full font-medium">Delivered</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-semibold">#102</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Bluetooth Speaker</p>
+                                    <p class="text-sm text-gray-600">2 items • $60.00</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 bg-yellow-100 text-yellow-800 text-sm rounded-full font-medium">Shipped</span>
+                        </div>
+                        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-semibold">#103</span>
+                                </div>
+                                <div>
+                                    <p class="font-semibold text-gray-900">Smart Watch</p>
+                                    <p class="text-sm text-gray-600">1 item • $120.00</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 bg-blue-100 text-blue-800 text-sm rounded-full font-medium">Processing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Quick Actions -->
+            <div class="grid lg:grid-cols-3 gap-8 mb-8">
+                <div class="bg-white rounded-xl shadow-sm border">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-lg font-bold text-gray-900">Quick Actions</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <a href="cart.html" class="w-full flex items-center space-x-3 p-4 bg-primary/5 hover:bg-primary/10 rounded-lg transition-colors group">
+                                <div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-semibold text-gray-900">Go to Cart</span>
+                            </a>
+                            <a href="checkout.html" class="w-full flex items-center space-x-3 p-4 bg-secondary/5 hover:bg-secondary/10 rounded-lg transition-colors group">
+                                <div class="w-10 h-10 bg-secondary rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-semibold text-gray-900">Checkout</span>
+                            </a>
+                            <a href="product.html" class="w-full flex items-center space-x-3 p-4 bg-accent/5 hover:bg-accent/10 rounded-lg transition-colors group">
+                                <div class="w-10 h-10 bg-accent rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-semibold text-gray-900">Browse Products</span>
+                            </a>
+                            <a href="#" class="w-full flex items-center space-x-3 p-4 bg-green-50 hover:bg-green-100 rounded-lg transition-colors group">
+                                <div class="w-10 h-10 bg-green-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                                    </svg>
+                                </div>
+                                <span class="font-semibold text-gray-900">Account Settings</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 bg-white rounded-xl shadow-sm border">
+                    <div class="p-6 border-b border-gray-200">
+                        <h3 class="text-lg font-bold text-gray-900">Wishlist</h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                                        <span class="text-white text-sm font-semibold">W1</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Noise Cancelling Headphones</p>
+                                        <p class="text-sm text-gray-600">$199.00</p>
+                                    </div>
+                                </div>
+                                <a href="cart.html" class="px-3 py-1 bg-primary text-white text-sm rounded-full font-medium hover:bg-blue-600">Add to Cart</a>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                <div class="flex items-center space-x-4">
+                                    <div class="w-10 h-10 bg-secondary rounded-full flex items-center justify-center">
+                                        <span class="text-white text-sm font-semibold">W2</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Fitness Tracker</p>
+                                        <p class="text-sm text-gray-600">$59.00</p>
+                                    </div>
+                                </div>
+                                <a href="cart.html" class="px-3 py-1 bg-primary text-white text-sm rounded-full font-medium hover:bg-blue-600">Add to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16 mt-16">
+        <div class="container mx-auto px-4 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4 text-primary">ShopPro</h3>
+                    <p class="text-gray-400 mb-4">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="product.html" class="text-gray-400 hover:text-white transition-colors">Products</a></li>
+                        <li><a href="cart.html" class="text-gray-400 hover:text-white transition-colors">Cart</a></li>
+                        <li><a href="login.html" class="text-gray-400 hover:text-white transition-colors">Login</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Support</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe to get updates on new products and offers.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-l-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-primary">
+                        <button class="bg-primary px-4 py-2 rounded-r-lg hover:bg-blue-600 transition-colors">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+                <p>Random Name — All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
